@@ -1,0 +1,10 @@
+name 'example'
+description 'An example cookbook'
+maintainer 'Storm Software'
+maintainer_email 'development@stormsoftware.com'
+license 'Apache-2.0'
+version '1.0.0'
+
+source_url 'https://github.com/storm-software/storm-chef'
+issues_url 'https://github.com/storm-software/storm-chef/issues'
+chef_version '>= 13.0'

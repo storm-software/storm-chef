@@ -1,0 +1,9 @@
+{
+  "generators": {
+    "cookbook": {
+      "factory": "./src/generators/cookbook/generator",
+      "schema": "./src/generators/cookbook/schema.json",
+      "description": "A generator that adds a cookbook project to the repository"
+    }
+  }
+}

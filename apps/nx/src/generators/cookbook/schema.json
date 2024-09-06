@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/schema",
+  "$id": "cookbook",
+  "title": "Chef Cookbook Create",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the cookbook",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      },
+      "x-prompt": "What name would you like to use?"
+    },
+    "directory": {
+      "description": "The directory of the new application.",
+      "type": "string"
+    }
+  },
+  "required": ["name"]
+}

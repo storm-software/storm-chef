@@ -1,0 +1,73 @@
+name: "Setup Workspace"
+description: "Install and pre-build tools for the workspace"
+inputs:
+  mise_env:
+    description: The environment type to install MISE tools for
+    default: "prod"
+    required: true
+  storm_bot_private_key:
+    description: The private key of the Storm bot
+    required: true
+  storm_bot_passphrase:
+    description: The passphrase of the Storm bot
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Setup MISE
+      uses: jdx/mise-action@v2
+      with:
+        version: latest
+        install: true
+        cache: true
+        experimental: true
+      env:
+        MISE_ENV: ${{ inputs.mise_env }}
+        MISE_CACHE_DIR: "~/.cache/mise/${{ inputs.mise_env }}"
+        MISE_USE_TOML: 1
+
+    - name: Restore cached npm dependencies
+      id: cache-dependencies-restore
+      uses: actions/cache/restore@v4
+      with:
+        path: |
+          node_modules
+          ~/.cache/Cypress # needed for the Cypress binary
+          ~/.cache/mise/${{ inputs.mise_env }}
+        key: "dependencies-${{ hashFiles('pnpm-lock.yaml') }}-${{ hashFiles('./.config/mise/config.${{ inputs.mise_env }}.toml') }}"
+
+    - name: Set up npm registry
+      uses: actions/setup-node@v4
+      with:
+        registry-url: https://registry.npmjs.org/
+        node-version-file: .github/.nvmrc
+        cache: pnpm
+        cache-dependency-path: pnpm-lock.yaml
+
+    - name: Install pnpm package manager
+      shell: bash
+      run: pnpm install --no-frozen-lockfile
+
+    - name: Setup pnpm config registry
+      run: pnpm config set registry https://registry.npmjs.org
+      shell: bash
+
+    - name: Cache npm dependencies
+      id: cache-dependencies-save
+      uses: actions/cache/save@v4
+      with:
+        path: |
+          node_modules
+          ~/.cache/Cypress # needed for the Cypress binary
+          ~/.cache/
+        key: ${{ steps.cache-dependencies-restore.outputs.cache-primary-key }}
+
+    - name: Configure git
+      run: |
+        git config user.name "Stormie-Bot"
+        git config user.email "Stormie-Bot@users.noreply.github.com"
+        git config lfs.allowincompletepush true
+        git config --global init.defaultBranch main
+        npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN
+      shell: bash

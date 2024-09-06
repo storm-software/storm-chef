@@ -1,0 +1,12 @@
+{
+  "name": "example-cookbook",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/nx/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "nx-release-publish": {
+      "executor": "@storm-software/cloudflare-tools:r2-upload-publish"
+    }
+  }
+}

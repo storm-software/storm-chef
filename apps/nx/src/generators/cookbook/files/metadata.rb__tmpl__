@@ -1,0 +1,6 @@
+name '<%=name %>'
+description 'A <%=name %> cookbook'
+maintainer 'Storm Software'
+maintainer_email 'development@stormsoftware.com'
+license 'apachev2'
+version '1.0.0'

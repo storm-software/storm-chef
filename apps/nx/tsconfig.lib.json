@@ -1,0 +1,16 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../../dist/out-tsc",
+    "moduleResolution": "node",
+    "strict": false,
+    "esModuleInterop": true,
+    "declaration": true,
+    "skipLibCheck": true,
+    "isolatedModules": false,
+    "types": ["node"],
+    "lib": ["esnext", "dom"]
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["jest.config.ts", "src/**/*.spec.ts", "src/**/*.test.ts"]
+}

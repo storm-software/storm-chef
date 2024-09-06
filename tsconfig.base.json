@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": "@storm-software/tsconfig/core.json",
+  "display": "Storm Software - Storm Chef",
+  "compilerOptions": {
+    "rootDir": ".",
+    "baseUrl": ".",
+    "paths": {
+      "@storm-chef/nx": ["apps/nx/src/index.ts"]
+    }
+  },
+  "include": ["**/*.ts", "**/*.tsx", "**/*.d.ts", "**/*.js", "**/*.jsx"],
+  "exclude": ["tmp"]
+}

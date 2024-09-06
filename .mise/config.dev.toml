@@ -1,0 +1,41 @@
+[env]
+_.file = '.env'
+
+[tools]
+gitsign = "0.10.2"
+nodejs = "20.14.0"
+pnpm = "9.8.0"
+lefthook = "1.6.18"
+terragrunt = "0.63.6"
+opentofu = "1.8.0"
+helm = "3.15.4"
+
+[plugins]
+gitsign = "https://github.com/spencergilbert/asdf-gitsign.git"
+pnpm = "https://github.com/jonathanmorley/asdf-pnpm.git"
+lefthook = "https://github.com/jtzero/asdf-lefthook.git"
+opentofu = "https://github.com/virtualroot/asdf-opentofu.git"
+terragrunt = "https://github.com/ohmer/asdf-terragrunt.git"
+helm = "https://github.com/Antiarchitect/asdf-helm.git"
+
+[settings]
+legacy_version_file = true
+always_keep_download = false
+always_keep_install = false
+cargo_binstall = true
+plugin_autoupdate_last_check_duration = '1 week'
+verbose = true
+asdf_compat = false
+http_timeout = 30
+jobs = 4
+raw = false
+yes = false
+not_found_auto_install = true
+task_output = "Storm Chef: "
+paranoid = false
+experimental = true
+status = { missing_tools = "if_other_versions_installed", show_env = true, show_tools = true }
+color = true
+
+[tasks."sign:commit"]
+run = "gitsign verify --certificate-identity=patrick.joseph.sullivan@protonmail.com --certificate-oidc-issuer=https://accounts.google.com HEAD"

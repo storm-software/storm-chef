@@ -1,0 +1,14 @@
+{
+  "name": "@storm-chef/nx",
+  "version": "0.0.1",
+  "type": "commonjs",
+  "main": "./src/index.js",
+  "typings": "./src/index.d.ts",
+  "dependencies": {
+    "@nx/devkit": "19.6.2",
+    "@storm-software/config": "latest",
+    "@storm-software/config-tools": "latest",
+    "tslib": "^2.3.0"
+  },
+  "generators": "./generators.json"
+}
